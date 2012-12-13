@@ -1,0 +1,8 @@
+---
+  - hosts: webservers
+
+    vars:
+        with_php54: true
+
+    tasks:
+      - include: tasks/setup.yml

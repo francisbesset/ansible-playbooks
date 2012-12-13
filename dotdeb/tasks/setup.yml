@@ -1,0 +1,12 @@
+---
+  - name: Add dotdeb squeeze repo
+    action: template src="dotdeb/templates/dotdeb.list.j2" dest=/etc/apt/sources.list.d/dotdeb.list mode=0644
+
+  - name: Download dotdeb GPG
+    action: get_url url=http://www.dotdeb.org/dotdeb.gpg dest=/tmp/dotdeb.gpg mode=0400
+
+  - name: Add dotdeb GPG
+    action: command apt-key add /tmp/dotdeb.gpg
+
+  - name: Apt update
+    action: apt update_cache=yes
