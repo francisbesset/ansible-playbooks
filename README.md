@@ -9,11 +9,6 @@ My ansible playbooks.
 ---
   - hosts: webservers
 
-    vars:
-      # dotdeb
-      with_php54: true
-
-    tasks:
-      - include: python/tasks/setup-apt.yml
-      - include: dotdeb/tasks/setup.yml
+  - include: python/apt.yml
+  - include: dotdeb/dotdeb.yml with_php54=false
 ```
