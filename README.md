@@ -16,4 +16,6 @@ My ansible playbooks.
         mysqld:
             bind_address: 127.0.0.1
             key_buffer: 16M
+            max_connection: 100
+            # you can add other key/value
 ```
