@@ -1,0 +1,6 @@
+{% for key, value in mysqld.iteritems() %}
+{% if loop.first %}
+[mysqld]
+{% endif %}
+{{ key }} = {{ value }}
+{% endfor %}

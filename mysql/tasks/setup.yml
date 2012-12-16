@@ -1,0 +1,8 @@
+---
+  - name: install mysql-server
+    action: apt name=mysql-server
+
+  - name: write conf.d/mysqld.cnf
+    action: template src="templates/mysqld.cnf.j2" dest="/etc/mysql/conf.d/mysqld.cnf"
+    notify:
+      - restart mysql
