@@ -10,6 +10,7 @@ My ansible playbooks.
   - hosts: webservers
 
   - include: python/apt.yml
+  - include: python/mysqldb.yml
   - include: dotdeb/dotdeb.yml with_php54=false
   - include: mysql/mysql.yml
     vars:
