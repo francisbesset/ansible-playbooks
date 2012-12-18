@@ -5,7 +5,7 @@ This playbook install the mysql-server package.
 
 ## Warning
 
-If you use this playbook, it is recommended to launch manualy `mysql_secure_installation` to:
+If you use this playbook, it is highly recommended to launch manualy `mysql_secure_installation` to:
 
 * change the empty user root password
 * disable root login remotely
@@ -16,10 +16,10 @@ If you use this playbook, it is recommended to launch manualy `mysql_secure_inst
 ## Vars
 
 * **mysqd**: Options for mysqld
-  * Type: Array
-  * Default:
-    * bind_address: 127.0.0.1
-    * key_buffer: 16M
+    * Type: Array
+    * Default:
+        * bind_address: 127.0.0.1
+        * key_buffer: 16M
 
 ## Example usage
 
