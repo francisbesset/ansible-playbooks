@@ -1,0 +1,3 @@
+---
+  - name: install php5-fpm
+    action: apt name=php5-fpm

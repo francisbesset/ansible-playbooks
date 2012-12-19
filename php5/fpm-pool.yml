@@ -1,0 +1,25 @@
+---
+  - hosts: webservers
+
+    vars:
+        name: www
+        user: www-data
+        group: www-data
+        listen: /var/run/php5-fpm.sock
+        bind: 127.0.0.1
+        pm_type: dynamic
+        pm_max_children: 5
+        pm_start_servers: 2
+        pm_min_spare_servers: 1
+        pm_max_spare_servers: 3
+        pm_process_idle_timeout: 10s
+        pm_max_requests: 500
+        php_flag: ~
+        php_admin_flag: ~
+        php_admin_value: ~
+
+    tasks:
+      - include: tasks/setup-fpm-pool.yml
+
+    handlers:
+      - include: handlers/handlers.yml
