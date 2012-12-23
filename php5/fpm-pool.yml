@@ -6,7 +6,7 @@
         user: www-data
         group: www-data
         listen: /var/run/php5-fpm.sock
-        bind: 127.0.0.1
+        listen_allowed_clients: 127.0.0.1
         pm_type: dynamic
         pm_max_children: 5
         pm_start_servers: 2

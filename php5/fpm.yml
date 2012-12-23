@@ -1,5 +1,11 @@
 ---
   - hosts: webservers
 
+    vars:
+      delete_default_pool: false
+
     tasks:
       - include: tasks/setup-fpm.yml
+
+    handlers:
+      - include: handlers/handlers.yml

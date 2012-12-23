@@ -51,7 +51,7 @@ listen = {{ listen }}
 ; must be separated by a comma. If this value is left blank, connections will be
 ; accepted from any ip address.
 ; Default Value: any
-listen.allowed_clients = {{ bind }}
+listen.allowed_clients = {{ listen_allowed_clients }}
 
 ; Specify the nice(2) priority to apply to the pool processes (only if set)
 ; The value can vary from -19 (highest priority) to 20 (lower priority)
