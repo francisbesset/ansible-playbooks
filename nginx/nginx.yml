@@ -1,0 +1,15 @@
+---
+  - hosts: webservers
+
+    vars:
+      delete_default_vhost: false
+      user: www-data
+      worker_processes: $ansible_processor_count
+      pid: /var/run/nginx.pid
+      worker_connections: 768
+
+    tasks:
+      - include: tasks/setup-nginx.yml
+
+    handlers:
+      - include: handlers/handlers.yml

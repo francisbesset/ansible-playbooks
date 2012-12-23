@@ -3,7 +3,7 @@ Ansible
 
 My ansible playbooks.
 
-## Example usage
+## Usage
 
 ``` yaml
 ---
@@ -45,4 +45,8 @@ My ansible playbooks.
     vars:
       name: bar
       listen: /var/run/php5-fpm-bar.sock
+
+  - include: nginx/nginx.yml
+    vars:
+      delete_default_vhost: true
 ```
