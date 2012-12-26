@@ -1,0 +1,10 @@
+---
+  - name: add nginx "$name" vhost
+    action: template src=templates/vhost-redirect.j2 dest=/etc/nginx/sites-available/$name
+    notify:
+      - restart nginx
+
+  - name: link nginx "$name" vhost in sites-enabled
+    action: file src=/etc/nginx/sites-available/$name dest=/etc/nginx/sites-enabled/$name state=link
+    notify:
+      - restart nginx

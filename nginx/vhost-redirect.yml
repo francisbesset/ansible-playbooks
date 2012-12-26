@@ -1,0 +1,14 @@
+---
+  - hosts: webservers
+
+    vars:
+      name: redirect_example.org
+      listen: "*:80"
+      server_name: example.org
+      redirect_url: http://www.$server_name
+
+    tasks:
+      - include: tasks/setup-vhost-redirect.yml
+
+    handlers:
+      - include: handlers/handlers.yml

@@ -1,0 +1,6 @@
+server {
+  listen {{ listen }};
+  server_name {{ server_name }};
+
+  rewrite ^(.*) {{ redirect_url }}$1 permanent;
+}

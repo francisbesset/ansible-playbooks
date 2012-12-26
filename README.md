@@ -49,4 +49,10 @@ My ansible playbooks.
   - include: nginx/nginx.yml
     vars:
       delete_default_vhost: true
+  - include: nginx/vhost-redirect.yml
+    vars:
+      name: redirect_$server_name
+      listen: "*:80"
+      server_name: example.org
+      redirect_url: http://www.$server_name
 ```
