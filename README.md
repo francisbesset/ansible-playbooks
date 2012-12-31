@@ -57,4 +57,8 @@ My ansible playbooks.
       listen: "*:80"
       server_name: example.org
       redirect_url: http://www.$server_name
+
+  - include: swap/swappiness.yml
+    vars:
+      swappiness: 60
 ```

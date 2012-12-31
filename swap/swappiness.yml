@@ -1,0 +1,11 @@
+---
+  - hosts: webservers
+
+    vars:
+      swappiness: 60
+
+    tasks:
+      - include: tasks/setup-swappiness.yml
+
+    handlers:
+      - include: handlers/handlers.yml
