@@ -58,6 +58,13 @@ My ansible playbooks.
       server_name: example.org
       redirect_url: http://www.$server_name
 
+  - include: memcached/memcached.yml
+    vars:
+      listen: 127.0.0.1
+      listen: 11211
+      memory: 64
+      max_connections: 1024
+
   - include: swap/swappiness.yml
     vars:
       swappiness: 60

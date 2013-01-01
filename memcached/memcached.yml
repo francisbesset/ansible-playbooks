@@ -1,0 +1,15 @@
+---
+  - hosts: webservers
+
+    vars:
+      listen: 127.0.0.1
+      port: 11211
+      user: nobody
+      memory: 64
+      max_connections: 1024
+
+    tasks:
+      - include: tasks/setup-memcached.yml
+
+    handlers:
+      - include: handlers/handlers.yml
