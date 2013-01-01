@@ -2,6 +2,9 @@
   - name: install memcached
     action: apt name=memcached
 
+  - name: install start-memcached script
+    action: copy src=files/start-memcached dest=/usr/share/memcached/scripts/start-memcached owner=root group=root mode=0755 backup=yes
+
   - name: write memcached.conf
     action: template src=templates/memcached.conf.j2 dest=/etc/memcached.conf mode=0644
     notify:
