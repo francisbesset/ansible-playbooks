@@ -5,4 +5,4 @@
       with_php54: true
 
     tasks:
-      - include: tasks/setup.yml
+      - include: tasks/setup-dotdeb.yml
