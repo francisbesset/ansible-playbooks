@@ -14,6 +14,8 @@ My ansible playbooks.
     vars:
       with_php54: false
 
+  - include: iptables/persistent.yml
+
   - include: python/mysqldb.yml
   - include: mysql/mysql.yml
     vars:

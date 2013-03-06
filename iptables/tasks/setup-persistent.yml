@@ -1,0 +1,3 @@
+---
+  - name: install iptables-persistent
+    action: apt name=iptables-persistent
