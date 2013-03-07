@@ -1,0 +1,3 @@
+---
+  - name: start iptables-persistent
+    action: shell /etc/init.d/iptables-persistent start

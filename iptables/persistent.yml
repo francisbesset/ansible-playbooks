@@ -3,3 +3,6 @@
 
     tasks:
       - include: tasks/setup-persistent.yml
+
+    handlers:
+      - include: handlers/handlers.yml
