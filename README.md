@@ -21,6 +21,7 @@ My ansible playbooks.
   - include: python/mysqldb.yml
   - include: mysql/mysql.yml
     vars:
+      mysql_root_password: TheUserRootPassword
       mysqld:
         bind_address: 127.0.0.1
         key_buffer: 16M
