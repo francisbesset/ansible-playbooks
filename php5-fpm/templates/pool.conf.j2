@@ -1,7 +1,7 @@
 ; Start a new pool named '{{ name }}'.
 ; the variable $pool can we used in any directive and will be replaced by the
-; pool name ('{{ name }}' here)
-[{{ name }}]
+; pool name ('{{ item.name }}' here)
+[{{ item.name }}]
 
 ; Per pool prefix
 ; It only applies on the following directives:
@@ -19,8 +19,8 @@
 ; Unix user/group of processes
 ; Note: The user is mandatory. If the group is not set, the default user's group
 ;       will be used.
-user = {{ user }}
-group = {{ group }}
+user = {{ item.user|default('www-data') }}
+group = {{ item.group|default('www-data') }}
 
 ; The address on which to accept FastCGI requests.
 ; Valid syntaxes are:
@@ -30,7 +30,7 @@ group = {{ group }}
 ;                            specific port;
 ;   '/path/to/unix/socket' - to listen on a unix socket.
 ; Note: This value is mandatory.
-listen = {{ listen }}
+listen = {{ item.listen|default('/var/run/php5-fpm.sock') }}
 
 ; Set listen(2) backlog.
 ; Default Value: 128 (-1 on FreeBSD and OpenBSD)
@@ -51,7 +51,7 @@ listen = {{ listen }}
 ; must be separated by a comma. If this value is left blank, connections will be
 ; accepted from any ip address.
 ; Default Value: any
-listen.allowed_clients = {{ listen_allowed_clients }}
+listen.allowed_clients = {{ listen_allowed_clients|default('127.0.0.1') }}
 
 ; Specify the nice(2) priority to apply to the pool processes (only if set)
 ; The value can vary from -19 (highest priority) to 20 (lower priority)
@@ -85,7 +85,7 @@ listen.allowed_clients = {{ listen_allowed_clients }}
 ;             pm.process_idle_timeout   - The number of seconds after which
 ;                                         an idle process will be killed.
 ; Note: This value is mandatory.
-pm = {{ pm_type }}
+pm = {{ pm_type|default('dynamic') }}
 
 ; The number of child processes to be created when pm is set to 'static' and the
 ; maximum number of child processes when pm is set to 'dynamic' or 'ondemand'.
@@ -96,33 +96,33 @@ pm = {{ pm_type }}
 ; forget to tweak pm.* to fit your needs.
 ; Note: Used when pm is set to 'static', 'dynamic' or 'ondemand'
 ; Note: This value is mandatory.
-pm.max_children = {{ pm_max_children }}
+pm.max_children = {{ pm_max_children|default(5) }}
 
 ; The number of child processes created on startup.
 ; Note: Used only when pm is set to 'dynamic'
 ; Default Value: min_spare_servers + (max_spare_servers - min_spare_servers) / 2
-pm.start_servers = {{ pm_start_servers }}
+pm.start_servers = {{ pm_start_servers|default(2) }}
 
 ; The desired minimum number of idle server processes.
 ; Note: Used only when pm is set to 'dynamic'
 ; Note: Mandatory when pm is set to 'dynamic'
-pm.min_spare_servers = {{ pm_min_spare_servers }}
+pm.min_spare_servers = {{ pm_min_spare_servers|default(1) }}
 
 ; The desired maximum number of idle server processes.
 ; Note: Used only when pm is set to 'dynamic'
 ; Note: Mandatory when pm is set to 'dynamic'
-pm.max_spare_servers = {{ pm_max_spare_servers }}
+pm.max_spare_servers = {{ pm_max_spare_servers|default(3) }}
 
 ; The number of seconds after which an idle process will be killed.
 ; Note: Used only when pm is set to 'ondemand'
 ; Default Value: 10s
-pm.process_idle_timeout = {{ pm_process_idle_timeout }};
+pm.process_idle_timeout = {{ pm_process_idle_timeout|default('10s') }};
 
 ; The number of requests each child process should execute before respawning.
 ; This can be useful to work around memory leaks in 3rd party libraries. For
 ; endless request processing specify '0'. Equivalent to PHP_FCGI_MAX_REQUESTS.
 ; Default Value: 0
-pm.max_requests = {{ pm_max_requests }}
+pm.max_requests = {{ pm_max_requests|default(500) }}
 
 ; The URI to view the FPM status page. If this value is not set, no URI will be
 ; recognized as a status page. It shows the following informations:
@@ -391,20 +391,17 @@ chdir = /
 ;php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 32M
 
-{% if php_flag is not none %}
+{% set php_flag = item.php_flag|default({}) %}
 {% for key, value in php_flag.iteritems() %}
 php_flag[{{ key }}] = {{ value }}
 {% endfor %}
-{% endif %}
 
-{% if php_admin_flag is not none %}
+{% set php_admin_flag = item.php_admin_flag|default({}) %}
 {% for key, value in php_admin_flag.iteritems() %}
 php_admin_flag[{{ key }}] = {{ value }}
 {% endfor %}
-{% endif %}
 
-{% if php_admin_value is not none %}
+{% set php_admin_value = item.php_admin_value|default({}) %}
 {% for key, value in php_admin_value.iteritems() %}
 php_admin_value[{{ key }}] = {{ value }}
 {% endfor %}
-{% endif %}

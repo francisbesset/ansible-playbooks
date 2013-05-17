@@ -9,3 +9,10 @@
     when: php5_fpm is defined and php5_fpm.delete_default_pool is defined and php5_fpm.delete_default_pool == True
     notify: restart php5-fpm
     tags: php5_fpm
+
+  - name: install php5-fpm pools
+    template: src=pool.conf.j2 dest=/etc/php5/fpm/pool.d/{{ item.name }}.conf owner=root group=root mode=0644
+    with_items: php5_fpm.pools
+    when: php5_fpm is defined and php5_fpm.pools
+    notify: restart php5-fpm
+    tags: php5_fpm

@@ -1,5 +1,0 @@
----
-  - name: add php5-fpm "$name" pool
-    action: template src=templates/pool.conf.j2 dest=/etc/php5/fpm/pool.d/$name.conf mode=0644
-    notify:
-      - restart php5-fpm
