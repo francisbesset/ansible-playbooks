@@ -3,7 +3,7 @@
     template: src=dotdeb.{{ ansible_lsb.codename }}.list.j2 dest=/etc/apt/sources.list.d/dotdeb.list owner=root group=root mode=0644
     tags: dotdeb
 
-  - name: download dotdeb gpg
+  - name: copy dotdeb gpg
     copy: src=dotdeb.gpg dest=/tmp/dotdeb.gpg mode=0400
     tags: dotdeb
 
