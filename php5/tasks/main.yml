@@ -1,0 +1,11 @@
+---
+  - name: install php5-fpm
+    apt: name=php5-fpm
+    notify: restart php5-fpm
+    tags: php5
+
+  - name: delete default pool
+    file: path=/etc/php5/fpm/pool.d/www.conf state=absent
+    when: php5_fpm is defined and php5_fpm.delete_default_pool is defined and php5_fpm.delete_default_pool == True
+    notify: restart php5-fpm
+    tags: php5
