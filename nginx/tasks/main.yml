@@ -1,0 +1,22 @@
+---
+  - name: install nginx
+    apt: name=nginx
+    notify: restart nginx
+    tags: nginx
+
+  - name: write nginx.conf
+    template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    notify: restart nginx
+    tags: nginx
+
+  - name: delete default vhost
+    file: path=/etc/nginx/sites-enabled/default state=absent
+    when: nginx.delete_default_vhost is defined and nginx.delete_default_vhost == True
+    notify: restart nginx
+    tags: nginx
+
+  - name: restore default vhost
+    file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/default owner=root group=root state=link
+    when: nginx.delete_default_vhost is defined and nginx.delete_default_vhost == False
+    notify: restart nginx
+    tags: nginx

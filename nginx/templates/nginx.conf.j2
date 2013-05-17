@@ -1,9 +1,9 @@
-user {{ user }};
-worker_processes {{ worker_processes }};
-pid {{ pid }};
+user {{ nginx.user|default('www-data') }};
+worker_processes {{ nginx.worker_processes|default(ansible_processor_count) }};
+pid {{ pid|default('/var/run/nginx.pid') }};
 
 events {
-    worker_connections {{ worker_connections }};
+    worker_connections {{ worker_connections|default(1024) }};
     # multi_accept on;
 }
 
