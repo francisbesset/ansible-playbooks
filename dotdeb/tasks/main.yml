@@ -1,0 +1,16 @@
+---
+  - name: add dotdeb repo
+    template: src=dotdeb.{{ ansible_lsb.codename }}.list.j2 dest=/etc/apt/sources.list.d/dotdeb.list owner=root group=root mode=0644
+    tags: dotdeb
+
+  - name: download dotdeb gpg
+    copy: src=dotdeb.gpg dest=/tmp/dotdeb.gpg mode=0400
+    tags: dotdeb
+
+  - name: add dotdeb gpg
+    command: apt-key add /tmp/dotdeb.gpg
+    tags: dotdeb
+
+  - name: apt update
+    apt: update_cache=yes
+    tags: dotdeb
