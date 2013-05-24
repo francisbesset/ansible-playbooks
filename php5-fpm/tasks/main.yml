@@ -1,6 +1,7 @@
 ---
   - name: install php5-fpm
     apt: name=php5-fpm
+    environment: "{{ proxy_env|default({}) }}"
     notify: restart php5-fpm
     tags: php5_fpm
 

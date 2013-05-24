@@ -13,4 +13,5 @@
 
   - name: apt update
     apt: update_cache=yes
+    environment: "{{ proxy_env|default({}) }}"
     tags: dotdeb

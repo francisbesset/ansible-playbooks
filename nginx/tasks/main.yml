@@ -1,6 +1,7 @@
 ---
   - name: install nginx
     apt: name=nginx
+    environment: "{{ proxy_env|default({}) }}"
     notify: restart nginx
     tags: nginx
 
