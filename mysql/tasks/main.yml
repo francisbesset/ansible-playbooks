@@ -2,13 +2,14 @@
   - name: install mysql-server
     action: apt name=mysql-server
     environment: "{{ proxy_env|default({}) }}"
+    tags: mysql
 
   - name: write conf.d/mysqld.cnf
     template: src=mysqld.cnf.j2 dest=/etc/mysql/conf.d/mysqld.cnf
-    notify:
-      - restart mysql
+    notify: restart mysql
+    tags: mysql
 
   - name: write conf.d/client.cnf
     template: src=client.cnf.j2 dest=/etc/mysql/conf.d/client.cnf
-    notify:
-      - restart mysql
+    notify: restart mysql
+    tags: mysql
