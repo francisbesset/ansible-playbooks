@@ -1,3 +1,0 @@
----
-  - name: install python-mysqldb
-    action: apt name=python-mysqldb

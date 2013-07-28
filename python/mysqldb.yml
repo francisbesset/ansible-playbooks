@@ -2,4 +2,4 @@
   - hosts: webservers
 
     tasks:
-      - include: tasks/setup-mysqldb.yml
+      - include: mysqldb/tasks/main.yml
