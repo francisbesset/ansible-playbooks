@@ -1,5 +1,5 @@
 ---
-  - hosts: webservers
+- hosts: webservers
 
-    tasks:
-      - include: apt/tasks/main.yml
+  tasks:
+    - include: apt/tasks/main.yml

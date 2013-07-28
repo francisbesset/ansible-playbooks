@@ -1,5 +1,5 @@
 ---
-  - hosts: webservers
+- hosts: webservers
 
-    tasks:
-      - include: mysqldb/tasks/main.yml
+  tasks:
+    - include: mysqldb/tasks/main.yml
