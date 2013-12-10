@@ -7,7 +7,7 @@ This playbook install the nginx package.
 
 ### Vars
 
-* **delete_defaul_vhost**: Delete or not default vhost
+* **delete_default_vhost**: Delete or not default vhost
     * Type: Boolean
     * Default: false
 * **user**:
