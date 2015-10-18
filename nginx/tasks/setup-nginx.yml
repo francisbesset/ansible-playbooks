@@ -1,14 +1,24 @@
 ---
-  - name: install nginx
-    action: apt name=nginx
 
-  - name: write nginx.conf
-    action: template src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
-    notify:
-      - restart nginx
+- name: Add nginx repo key
+  apt_key:
+    url: "http://nginx.org/keys/nginx_signing.key"
 
-  - name: delete default vhost
-    action: file path=/etc/nginx/sites-enabled/default state=absent
-    only_if: "$delete_default_vhost"
-    notify:
-      - restart nginx
+- name: Add official APT repository
+  when: ansible_os_family == 'Debian'
+  apt_repository:
+    repo: "deb http://nginx.org/packages/{{ansible_distribution|lower}}/ {{ansible_distribution_release}} nginx"
+
+- name: install latest nginx version
+  action: apt name=nginx state=latest
+
+- name: write nginx.conf
+  action: template src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify:
+    - restart nginx
+
+- name: delete default vhost
+  action: file path=/etc/nginx/sites-enabled/default state=absent
+  only_if: "$delete_default_vhost"
+  notify:
+    - restart nginx
